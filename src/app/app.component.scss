@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.main-wrapper {
+  width: 100%;
+}
+
+.header {
+  width: 100%;
+  display: block;
+  padding: 15px 0;
+  background-color: #e8e8e8;
+
+  &__inner {
+    max-width: 1170px;
+    display: flex;
+    flex-direction: row-reverse;
+    margin: auto;
+    width: 100%;
+  }
+}
+
+.student-panel {
+  max-width: 1170px;
+  display: block;
+  width: 100%;
+  margin: auto;
+}
+

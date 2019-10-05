@@ -1,0 +1,13 @@
+.ui-button {
+  transition: .3s;
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    opacity: .8;
+  }
+
+  &:active {
+    opacity: .8;
+  }
+}

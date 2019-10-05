@@ -1,0 +1,9 @@
+.sheet-header {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  background-color: #e8e8e8;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+}

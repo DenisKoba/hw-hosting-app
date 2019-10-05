@@ -1,0 +1,15 @@
+<button class="ui-button"
+        [ngStyle]="{
+        background: background,
+        color: color,
+        padding: padding,
+        border: border,
+        outline: outline,
+        fontSize: fontSize,
+        fontWeight: fontWeight
+        }"
+        (click)="handleClick()"
+        (mouseover)="handleMouseover()" >
+    {{ name }}
+    <ng-content></ng-content>
+</button>

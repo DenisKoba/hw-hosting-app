@@ -1,0 +1,16 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
+.avarage-rate {
+  font-size: 13px;
+  font-weight: 600;
+
+  &__number {
+    color: #fff;
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 12px;
+  }
+}

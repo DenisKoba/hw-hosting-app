@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hw-hosting-app';
+
+  logout() {
+    console.log('logged out')
+  }
 }

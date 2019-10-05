@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="row__item">{{ homework.number }}</div>
+    <div class="row__item">{{ homework.themeName }}</div>
+    <div class="row__item">{{ homework.files }}</div>
+    <div class="row__item">{{ homework.status }}</div>
+    <div class="row__item">
+        <span [ngClass]="{'active-comment': isHovered}" (mouseenter)="toggleComment()" (mouseleave)="toggleComment()">
+            {{ comment }}
+        </span>
+    </div>
+    <div class="row__item rate">{{ homework.rate }}</div>
+</div>
