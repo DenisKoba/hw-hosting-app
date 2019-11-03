@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SheetRowComponent implements OnInit {
   @Input() homework: any
+  @Input() mode: string
 
   isHovered = false
   constructor() { }

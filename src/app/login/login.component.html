@@ -1,1 +1,24 @@
-<p>login works!</p>
+<section class="login">
+   <div class="login__wrapper">
+       <img class="login__logo" src="../../assets/projector.png">
+       <app-ui-input
+               placeholder="Email"
+               class="login__email"
+               color="#ffffff"
+               (input)="handleEmail($event)"
+       ></app-ui-input>
+       <app-ui-input
+               placeholder="Password"
+               type="password"
+               class="login__password"
+               (input)="handlePassword($event)"
+       ></app-ui-input>
+       <app-ui-button
+               fontWeight="600"
+               fontSize="16px"
+               name="Login"
+               background=""
+               (clickButton)="login()" class="login__button"
+       ></app-ui-button>
+   </div>
+</section>

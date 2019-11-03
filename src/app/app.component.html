@@ -1,4 +1,4 @@
-<section class="main-wrapper">
+<section class="main-wrapper" *ngIf="authSrvice.isloggedIn">
   <header class="header">
     <div class="header__inner">
       <app-ui-button class="button"
@@ -7,9 +7,11 @@
                      background="#aaaaaa"
                      border="none"
                      padding="5px 12px 7px"
-                     (click)="logout()"
+                     (clickButton)="logout()"
       ></app-ui-button>
     </div>
   </header>
-  <app-student-panel class="student-panel"></app-student-panel>
+  <app-student-panel *ngIf="authSrvice.userRole === 'student'" [mode]="mode" class="student-panel"></app-student-panel>
+  <app-teacher-panel *ngIf="authSrvice.userRole === 'teacher'" [mode]="mode" class="student-panel"></app-teacher-panel>
 </section>
+<app-login *ngIf="!authSrvice.isloggedIn"></app-login>

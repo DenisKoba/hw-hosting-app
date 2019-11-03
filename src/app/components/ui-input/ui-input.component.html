@@ -1,1 +1,7 @@
-<p>ui-input works!</p>
+<input [placeholder]="placeholder"
+       [(ngModel)]="inputValue"
+       (input)="handleInput($event)"
+       [type]="type"
+       class="ui-input"
+       [ngStyle]="{ 'border-bottom': '1px solid' + borderColor, color: color }"
+       [disabled]="disabled" />

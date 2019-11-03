@@ -4,6 +4,8 @@
                    color="#ffffff"
                    background="#1464f6"
                    border="none"
+                   (clickButton)="openModal()"
                    padding="20px 60px"></app-ui-button>
 </div>
-<app-sheet></app-sheet>
+<app-sheet [mode]="mode"></app-sheet>
+<app-student-edit-modal *ngIf="isVisible"></app-student-edit-modal>

@@ -4,8 +4,8 @@
     <div class="sheet-header__cell">Files</div>
     <div class="sheet-header__cell">Status</div>
     <div class="sheet-header__cell">Teacher's comment</div>
-    <div class="sheet-header__cell">Rate</div>
+    <div class="sheet-header__cell" *ngIf="mode === 'student'">Rate</div>
 </div>
 <div class="row">
-    <app-sheet-row class="row" *ngFor="let homework of homeworks; index as i" [homework]="homework"></app-sheet-row>
+    <app-sheet-row class="row" [mode]="mode" *ngFor="let homework of homeworks; index as i" [homework]="homework"></app-sheet-row>
 </div>
