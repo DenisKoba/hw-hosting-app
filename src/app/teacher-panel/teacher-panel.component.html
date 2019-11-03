@@ -1,1 +1,8 @@
-<p>teacher-panel works!</p>
+<div class="navigation">
+    <p class="avarage-rate">Avarage rate <span class="avarage-rate__number" [ngStyle]="{ background: buttonColor }">4.3</span></p>
+    <app-ui-select [options]="topics"
+                   [currentOptionIndex]="0"
+                   label="Student Name"
+                   name="Student name"
+                   (select)="handleSelect($event)"></app-ui-select>
+<app-sheet [mode]="mode"></app-sheet>

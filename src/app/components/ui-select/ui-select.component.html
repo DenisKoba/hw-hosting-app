@@ -1,1 +1,5 @@
-<p>ui-select works!</p>
+<material-angular-select [data]="options"
+                         label="Topic"
+                         name="Topic"
+                         [currentValue]="options[0]"
+                         (selectedValue)="handleSelect($event)"></material-angular-select>

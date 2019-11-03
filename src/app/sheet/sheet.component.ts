@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-sheet',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sheet.component.scss']
 })
 export class SheetComponent implements OnInit {
+  @Input() mode: string
+
   homeworks = [
     {
       number: 1,

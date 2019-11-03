@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { NgxSmartModalService } from 'ngx-smart-modal';
+import { CreateHomeworkComponent } from '../create-homework/create-homework.component';
+
 
 @Component({
   selector: 'app-student-panel',
@@ -6,6 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./student-panel.component.scss']
 })
 export class StudentPanelComponent implements OnInit {
+  constructor(public NgxSmartModalService: NgxSmartModalService) {
+    this.NgxSmartModalService.create('myModal', CreateHomeworkComponent, { force: true, hideDelay: 0, backdrop: true})
+  }
+
+  @Input() mode: string
+
   rateColors = {
     green: '#4ACF23',
     orange: '#FFC13D',
@@ -30,9 +39,13 @@ export class StudentPanelComponent implements OnInit {
     }
   }
 
-  constructor() { }
+  openModal() {
+    this.NgxSmartModalService.setModalData({someData: 'data'}, 'myModal')
+    this.NgxSmartModalService.toggle('myModal')
+  }
 
   ngOnInit() {
+    console.log(this.NgxSmartModalService)
   }
 
 }

@@ -8,5 +8,24 @@
             {{ comment }}
         </span>
     </div>
-    <div class="row__item rate">{{ homework.rate }}</div>
+    <div class="row__item rate" *ngIf="mode === 'student'">{{ homework.rate }}</div>
+    <div class="row__item row__buttons" *ngIf="mode === 'teacher'">
+        <app-ui-button class="button"
+                       name=""
+                       color="#ffffff"
+                       background="#aaaaaa"
+                       border="none"
+                       padding="5px 12px 7px"
+                       (clickButton)="logout()"
+        ><img class="download-icon" src="../../assets/cloud-download-alt-solid.svg" />
+        </app-ui-button>
+        <app-ui-button class="button"
+                       name="Respond"
+                       color="#ffffff"
+                       background="#1464f6"
+                       border="none"
+                       padding="5px 12px 7px"
+                       (clickButton)="logout()"
+        ></app-ui-button>
+    </div>
 </div>

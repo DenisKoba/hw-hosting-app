@@ -18,15 +18,15 @@ export class UiButtonComponent implements OnInit {
   @Input() fontSize = '14px'
   @Input() fontWeight = '400'
 
-  @Output() click: EventEmitter<any> = new EventEmitter();
-  @Output() mouseover: EventEmitter<any> = new EventEmitter();
+  @Output() clickButton: EventEmitter<any> = new EventEmitter();
+  @Output() mouseoverButton: EventEmitter<any> = new EventEmitter();
 
   handleClick() {
-    this.click.emit(null)
+    this.clickButton.emit(null)
   }
 
   handleMouseover() {
-    this.mouseover.emit(null)
+    this.mouseoverButton.emit(null)
   }
 
   ngOnInit() {

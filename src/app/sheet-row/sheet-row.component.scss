@@ -4,8 +4,14 @@
   font-size: 13px;
   padding: 10px 15px 10px;
   border-bottom: 1px solid #e2e2e2;
-  min-height: 81px;
+  min-height: 101px;
   box-sizing: border-box;
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 .rate {
@@ -22,4 +28,8 @@
   box-shadow: 0px 4px 10px #00000026;
   overflow: scroll;
   max-height: 300px;
+}
+
+.download-icon {
+  width: 17px;
 }
