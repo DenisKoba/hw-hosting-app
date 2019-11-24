@@ -31,9 +31,7 @@ export class AppComponent implements OnInit {
       .valueChanges()
       .pipe()
       .subscribe(data => {
-        if (!data.length || (this.id.length && !this.isUserInDataBase(data))) {
-          this.resolveUserDatabase();
-        }
+        this.users = data;
       });
 
     this.firebaseAuth.authState.subscribe(user => {
@@ -64,12 +62,6 @@ export class AppComponent implements OnInit {
       role: data.email.includes('teacher') ? 'teacher' : 'student',
       id: data.uid,
     };
-  }
-
-  resolveUserDatabase() {
-    this.db.collection('users').add({
-      ...this.userData
-    });
   }
 
   ngOnInit(): void {}

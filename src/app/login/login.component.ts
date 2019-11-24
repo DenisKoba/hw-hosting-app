@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import * as loginActions from '../../store/auth/actions.auth';
 import { AuthService } from '../../services/auth.service';
 import * as rootApp from '../../store/app.reducer';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,11 @@ import * as rootApp from '../../store/app.reducer';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(readonly store: Store<rootApp.AppState>, private authSrvice: AuthService ) { }
+  constructor(
+    readonly store: Store<rootApp.AppState>,
+    private authSrvice: AuthService,
+    private db: AngularFirestore
+  ) { }
   email: string = null
   password: string = null
   isLogin = true
@@ -39,8 +44,22 @@ export class LoginComponent implements OnInit {
 
   signUp() {
     this.authSrvice.signUpNewUser(this.email, this.password).then((data) => {
-      // @ts-ignore
-     console.log(data);
+      if (!data) return
+      const { user } = data
+      const userData: any = {
+        refreshToken: user.refreshToken,
+        name: user.userName || '',
+        photo: user.photoUrl || '',
+        email: user.email,
+        role: this.email.includes('teacher') ? 'teacher' : 'student',
+        id: user.uid,
+      }
+      this.store.dispatch(new loginActions.LoginAction(userData));
+      this.authSrvice.setAuthCookie(userData);
+      const { refreshToken, ...dbData } = userData
+      this.db.collection('users').add({
+        ...dbData
+      });
     });
   }
 
