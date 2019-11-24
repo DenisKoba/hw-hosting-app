@@ -15,11 +15,11 @@ export class SheetRowComponent implements OnInit {
   get comment() {
     return !this.isHovered
       ? `${this.homework.comment.slice(0, 100)}...`
-      : this.homework.comment
+      : this.homework.comment;
   }
 
   toggleComment() {
-    this.isHovered = !this.isHovered
+    this.isHovered = !this.isHovered;
   }
 
   ngOnInit() {

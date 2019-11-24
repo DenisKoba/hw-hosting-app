@@ -8,17 +8,28 @@
                (input)="handleEmail($event)"
        ></app-ui-input>
        <app-ui-input
-               placeholder="Password"
+               [placeholder]="isLogin ? 'Password' : 'Create password'"
                type="password"
                class="login__password"
                (input)="handlePassword($event)"
        ></app-ui-input>
-       <app-ui-button
-               fontWeight="600"
-               fontSize="16px"
-               name="Login"
-               background=""
-               (clickButton)="login()" class="login__button"
-       ></app-ui-button>
+      <div class="login__buttons-wrapper">
+          <app-ui-button
+                  fontWeight="600"
+                  fontSize="16px"
+                  [name]="isLogin ? 'Sign up' : 'Back to login'"
+                  background=""
+                  class="login__button signup-button"
+                  (clickButton)="resolveView()"
+          ></app-ui-button>
+          <app-ui-button
+                  fontWeight="600"
+                  fontSize="16px"
+                  [name]="isLogin ? 'Login' : 'Sign up'"
+                  background=""
+                  (clickButton)="isLogin ? login() : signUp()"
+                  class="login__button"
+          ></app-ui-button>
+      </div>
    </div>
 </section>

@@ -1,0 +1,12 @@
+.ui-select::ng-deep input {
+  padding: 15px 0 8px 0;
+  font-size: 16px;
+  color: #000;
+  &::placeholder {
+    color: #3f3f3f;
+  }
+}
+
+.ui-select::ng-deep label .mdl-icon-toggle__label {
+  margin-top: -40px;
+}

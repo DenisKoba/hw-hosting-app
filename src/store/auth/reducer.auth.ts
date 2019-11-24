@@ -9,6 +9,7 @@ export interface State {
     photo: string
     email: string
     role: string
+    id: string
   };
 }
 
@@ -19,6 +20,7 @@ const InitialState: State = {
     photo: '',
     email: '',
     role: 'student',
+    id: ''
   }
 }
 

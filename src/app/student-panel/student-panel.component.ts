@@ -1,6 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { NgxSmartModalService } from 'ngx-smart-modal';
-import { CreateHomeworkComponent } from '../create-homework/create-homework.component';
+import { Component, ElementRef, Input, ViewChild, OnInit } from '@angular/core';
 
 
 @Component({
@@ -9,10 +7,7 @@ import { CreateHomeworkComponent } from '../create-homework/create-homework.comp
   styleUrls: ['./student-panel.component.scss']
 })
 export class StudentPanelComponent implements OnInit {
-  constructor(public NgxSmartModalService: NgxSmartModalService) {
-    this.NgxSmartModalService.create('myModal', CreateHomeworkComponent, { force: true, hideDelay: 0, backdrop: true})
-  }
-
+  @ViewChild('createModal', {static: true}) modal: ElementRef;
   @Input() mode: string
 
   rateColors = {
@@ -23,6 +18,7 @@ export class StudentPanelComponent implements OnInit {
   }
 
   avarageRate = 3.2
+  isPopupVisible = false
 
   get buttonColor() {
     if (this.avarageRate === 5) {
@@ -40,12 +36,10 @@ export class StudentPanelComponent implements OnInit {
   }
 
   openModal() {
-    this.NgxSmartModalService.setModalData({someData: 'data'}, 'myModal')
-    this.NgxSmartModalService.toggle('myModal')
+    this.isPopupVisible = !this.isPopupVisible;
   }
 
-  ngOnInit() {
-    console.log(this.NgxSmartModalService)
+  ngOnInit(): void {
+    console.log(this.modal);
   }
-
 }

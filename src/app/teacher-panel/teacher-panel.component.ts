@@ -51,7 +51,7 @@ export class TeacherPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.NgxSmartModalService)
+    
   }
 
 }

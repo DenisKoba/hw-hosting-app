@@ -1,4 +1,4 @@
-<div class="navigation">
+<div #createModal class="navigation">
     <p class="avarage-rate">Avarage rate <span class="avarage-rate__number" [ngStyle]="{ background: buttonColor }">4.3</span></p>
     <app-ui-button name="Add homework +"
                    color="#ffffff"
@@ -8,4 +8,4 @@
                    padding="20px 60px"></app-ui-button>
 </div>
 <app-sheet [mode]="mode"></app-sheet>
-<app-student-edit-modal *ngIf="isVisible"></app-student-edit-modal>
+<app-create-homework *ngIf="isPopupVisible" #createModal (closeModal)="openModal()"></app-create-homework>

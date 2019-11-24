@@ -22,6 +22,17 @@ export class UiInputComponent implements OnInit {
     this.input.emit(this.inputValue)
   }
 
+  get classNameByType() {
+    if (this.type !== 'text') {
+      return `${this.type}-input`;
+    }
+    return 'ui-input';
+  }
+
+  get labelClassBytype() {
+    return `${this.type}-label`;
+  }
+
   ngOnInit() {
   }
 
