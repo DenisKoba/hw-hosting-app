@@ -7,11 +7,14 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as rootApp from '../store/app.reducer';
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as loginActions from '../store/auth/actions.auth';
+import * as documentActions from '../store/documents/actions.documents';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [DatabaseService]
 })
 export class AppComponent implements OnInit {
   constructor(
@@ -19,14 +22,18 @@ export class AppComponent implements OnInit {
     private authSrvice: AuthService,
     private db: AngularFirestore,
     private firebaseAuth: AngularFireAuth,
+    private databaseService: DatabaseService
   ) {
     this.store.dispatch(new AuthActions.ResolveAuthData());
-    this.user = this.store.select('auth')
-    this.user.pipe().subscribe(data => {
-      this.role = data.userData.role;
-      this.userData = data.userData
-      this.id = data.userData.id;
-    });
+    this.store
+      .select('auth')
+      .pipe()
+      .subscribe(data => {
+        this.role = data.userData.role;
+        this.userData = data.userData
+        this.id = data.userData.id;
+        if (this.id.length) this.requestUserData(this.id);
+      });
     db.collection('users')
       .valueChanges()
       .pipe()
@@ -49,8 +56,10 @@ export class AppComponent implements OnInit {
     this.authSrvice.logout();
   }
 
-  isUserInDataBase(data) {
-    return data.some((user: any) => user.id === this.id);
+  requestUserData(id: string) {
+    this.databaseService.fetchCollection('userId', id).then((documents) => {
+      this.store.dispatch(new documentActions.DocumentsSetAction(documents));
+    });
   }
 
   currentUserData(data) {

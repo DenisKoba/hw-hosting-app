@@ -48,7 +48,9 @@ export class LoginComponent implements OnInit {
       const { user } = data
       const userData: any = {
         refreshToken: user.refreshToken,
+        // @ts-ignore
         name: user.userName || '',
+        // @ts-ignore
         photo: user.photoUrl || '',
         email: user.email,
         role: this.email.includes('teacher') ? 'teacher' : 'student',

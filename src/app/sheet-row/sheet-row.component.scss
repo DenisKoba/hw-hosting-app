@@ -6,6 +6,17 @@
   border-bottom: 1px solid #e2e2e2;
   min-height: 101px;
   box-sizing: border-box;
+  transition: .3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 6, 245, 0.01);
+  }
+
+
+  &__item {
+    max-width: 190px;
+  }
 
   &__buttons {
     display: flex;

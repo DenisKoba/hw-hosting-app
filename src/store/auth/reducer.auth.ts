@@ -1,8 +1,8 @@
 import Cookie from 'js-cookie';
 import * as AuthActions from './actions.auth';
-import {AUTH} from './actions.auth';
+import { AUTH } from './actions.auth';
 
-export interface State {
+export interface AuthState {
   userData: {
     refreshToken: string,
     name: string
@@ -13,7 +13,7 @@ export interface State {
   };
 }
 
-const InitialState: State = {
+const InitialState: AuthState = {
   userData: {
     refreshToken: '',
     name: '',

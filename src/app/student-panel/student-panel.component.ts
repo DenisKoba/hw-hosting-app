@@ -1,4 +1,7 @@
 import { Component, ElementRef, Input, ViewChild, OnInit } from '@angular/core';
+import {Store} from '@ngrx/store';
+import * as rootApp from '../../store/app.reducer';
+import { Documents } from '../../types';
 
 
 @Component({
@@ -7,6 +10,14 @@ import { Component, ElementRef, Input, ViewChild, OnInit } from '@angular/core';
   styleUrls: ['./student-panel.component.scss']
 })
 export class StudentPanelComponent implements OnInit {
+  constructor(readonly store: Store<rootApp.AppState>) {
+    this.store
+      .select('documents')
+      .pipe()
+      .subscribe(data => {
+        this.documents = data.studentDocuments;
+      });
+  }
   @ViewChild('createModal', {static: true}) modal: ElementRef;
   @Input() mode: string
 
@@ -19,6 +30,9 @@ export class StudentPanelComponent implements OnInit {
 
   avarageRate = 3.2
   isPopupVisible = false
+  isEditPopupVisible = false
+  editHomeworkNumber = null
+  documents: Documents.Document[] = []
 
   get buttonColor() {
     if (this.avarageRate === 5) {
@@ -35,8 +49,25 @@ export class StudentPanelComponent implements OnInit {
     }
   }
 
+  get editingHomework(): Documents.Document | null {
+    if (this.editHomeworkNumber) {
+      return this.documents.find(document => document.number === this.editHomeworkNumber);
+    }
+
+    return null;
+  }
+
   openModal() {
     this.isPopupVisible = !this.isPopupVisible;
+  }
+
+  openEditModal(data) {
+    this.editHomeworkNumber = data
+    this.isEditPopupVisible = true;
+  }
+
+  closeEditModal() {
+    this.isEditPopupVisible = false;
   }
 
   ngOnInit(): void {

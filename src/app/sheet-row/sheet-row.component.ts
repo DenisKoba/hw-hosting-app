@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-sheet-row',
@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SheetRowComponent implements OnInit {
   @Input() homework: any
   @Input() mode: string
+  @Output() openEditModal: EventEmitter<any> = new EventEmitter();
 
   isHovered = false
   constructor() { }
