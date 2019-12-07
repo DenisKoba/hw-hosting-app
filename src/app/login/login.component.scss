@@ -7,6 +7,12 @@
   align-items: center;
   justify-content: center;
 
+  &__buttons-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &__logo {
     width: 200px;
     margin: auto;
@@ -17,16 +23,23 @@
     min-width: 500px;
   }
 
-  &__email::ng-deep input, &__password::ng-deep input {
+  &__email::ng-deep input, &__password::ng-deep input, &__name::ng-deep input {
     background-color: transparent;
     color: #fff !important;
     font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #1464f6;
+    width: 100%;
+    display: block;
+    padding: 20px 0 10px;
+    box-sizing: border-box;
+    outline: none;
     &:-webkit-autofill {
       -webkit-text-fill-color: #fff;
       -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0), inset 0 0 0 100px #0006f5;
     }
     &::placeholder {
-      color: #fff;
+      color: rgba(255, 255, 255, 0.25);
     }
     &:focus {
       border-color: #fff;
@@ -41,4 +54,15 @@
     display: block;
     margin: 20px auto 0;
   }
+
+  .signup-button::ng-deep button {
+    background-color: transparent;
+    border: 2px solid #ffdc00;
+    color: #ffdc00;
+  }
+
+  .signup-button {
+    margin: 0 20px 0 0;
+  }
+
 }

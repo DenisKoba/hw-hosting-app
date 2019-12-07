@@ -11,7 +11,7 @@
       ></app-ui-button>
     </div>
   </header>
-  <app-student-panel *ngIf="authSrvice.userRole === 'student'" [mode]="mode" class="student-panel"></app-student-panel>
-  <app-teacher-panel *ngIf="authSrvice.userRole === 'teacher'" [mode]="mode" class="student-panel"></app-teacher-panel>
+  <app-student-panel *ngIf="authSrvice.userRole === 'student'" [mode]="role" class="student-panel"></app-student-panel>
+  <app-teacher-panel *ngIf="authSrvice.userRole === 'teacher'" [mode]="role" [students]="students" class="student-panel"></app-teacher-panel>
 </section>
 <app-login *ngIf="!authSrvice.isloggedIn"></app-login>

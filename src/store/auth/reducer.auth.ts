@@ -1,24 +1,26 @@
 import Cookie from 'js-cookie';
 import * as AuthActions from './actions.auth';
-import {AUTH} from './actions.auth';
+import { AUTH } from './actions.auth';
 
-export interface State {
+export interface AuthState {
   userData: {
     refreshToken: string,
     name: string
     photo: string
     email: string
     role: string
+    id: string
   };
 }
 
-const InitialState: State = {
+const InitialState: AuthState = {
   userData: {
     refreshToken: '',
     name: '',
     photo: '',
     email: '',
     role: 'student',
+    id: ''
   }
 }
 

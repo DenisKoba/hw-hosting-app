@@ -1,5 +1,8 @@
-<material-angular-select [data]="options"
-                         label="Topic"
-                         name="Topic"
-                         [currentValue]="options[0]"
-                         (selectedValue)="handleSelect($event)"></material-angular-select>
+<material-angular-select
+        class="ui-select"
+        [data]="options"
+        label="Topic"
+        name="Topic"
+        [currentValue]="options[0]"
+        (selectedValue)="handleSelect($event)"
+></material-angular-select>

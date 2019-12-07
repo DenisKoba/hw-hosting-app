@@ -1,14 +1,14 @@
-<div class="row">
+<div class="row" (click)="openEditModal.emit(homework.number)">
     <div class="row__item">{{ homework.number }}</div>
-    <div class="row__item">{{ homework.themeName }}</div>
-    <div class="row__item">{{ homework.files }}</div>
+    <div class="row__item">{{ homework.topic }}</div>
+    <div class="row__item file">{{ homework.fileName }}</div>
     <div class="row__item">{{ homework.status }}</div>
     <div class="row__item">
         <span [ngClass]="{'active-comment': isHovered}" (mouseenter)="toggleComment()" (mouseleave)="toggleComment()">
             {{ comment }}
         </span>
     </div>
-    <div class="row__item rate" *ngIf="mode === 'student'">{{ homework.rate }}</div>
+    <div class="row__item rate" *ngIf="mode === 'student'">{{ homework.rate !== 0 ? homework.rate : 'Not rated' }}</div>
     <div class="row__item row__buttons" *ngIf="mode === 'teacher'">
         <app-ui-button class="button"
                        name=""

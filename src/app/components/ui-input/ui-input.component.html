@@ -1,7 +1,9 @@
-<input [placeholder]="placeholder"
-       [(ngModel)]="inputValue"
-       (input)="handleInput($event)"
-       [type]="type"
-       class="ui-input"
-       [ngStyle]="{ 'border-bottom': '1px solid' + borderColor, color: color }"
-       [disabled]="disabled" />
+<label [class]="labelClassBytype">
+    <input [placeholder]="placeholder"
+           [(ngModel)]="inputValue"
+           (input)="handleInput($event)"
+           [type]="type"
+           [class]="classNameByType"
+           [ngStyle]="{ 'border-bottom': '1px solid' + borderColor, color: color }"
+           [disabled]="disabled" />
+</label>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs';
 import Cookie from 'js-cookie';
@@ -25,6 +25,14 @@ export class AuthService {
     return this.firebaseAuth
       .auth
       .signInWithEmailAndPassword(email, password)
+      .then(value => value)
+      .catch(err => console.warn('Something went wrong:', err.message));
+  }
+
+  signUpNewUser(email: string, password: string) {
+    return this.firebaseAuth
+      .auth
+      .createUserWithEmailAndPassword(email, password)
       .then(value => value)
       .catch(err => console.warn('Something went wrong:', err.message));
   }
