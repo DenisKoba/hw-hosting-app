@@ -9,4 +9,5 @@ export type Document = {
   userId: string
   fileName: string,
   topic: string
+  id?: string
 };

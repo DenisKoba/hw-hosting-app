@@ -17,6 +17,7 @@ export class UiButtonComponent implements OnInit {
   @Input() height: string
   @Input() fontSize = '14px'
   @Input() fontWeight = '400'
+  @Input() disabled = false
 
   @Output() clickButton: EventEmitter<any> = new EventEmitter();
   @Output() mouseoverButton: EventEmitter<any> = new EventEmitter();

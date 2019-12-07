@@ -2,6 +2,13 @@
    <div class="login__wrapper">
        <img class="login__logo" src="../../assets/projector.png">
        <app-ui-input
+               *ngIf="!isLogin"
+               placeholder="Name and Surname"
+               class="login__name"
+               color="#ffffff"
+               (input)="handleUserName($event)"
+       ></app-ui-input>
+       <app-ui-input
                placeholder="Email"
                class="login__email"
                color="#ffffff"

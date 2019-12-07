@@ -3,12 +3,14 @@ import { AuthService } from '../services/auth.service';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as AuthActions from '../store/auth/actions.auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import * as rootApp from '../store/app.reducer';
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as loginActions from '../store/auth/actions.auth';
 import * as documentActions from '../store/documents/actions.documents';
 import { DatabaseService } from '../services/database.service';
+import { PATHS } from '../constants';
+import {Item} from './create-homework/create-homework.component';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +28,7 @@ export class AppComponent implements OnInit {
   ) {
     this.store.dispatch(new AuthActions.ResolveAuthData());
     this.store
-      .select('auth')
+      .select(PATHS.AUTH)
       .pipe()
       .subscribe(data => {
         this.role = data.userData.role;
@@ -34,32 +36,47 @@ export class AppComponent implements OnInit {
         this.id = data.userData.id;
         if (this.id.length) this.requestUserData(this.id);
       });
-    db.collection('users')
-      .valueChanges()
-      .pipe()
-      .subscribe(data => {
-        this.users = data;
-      });
-
     this.firebaseAuth.authState.subscribe(user => {
       if (user) this.store.dispatch(new loginActions.LoginAction(this.currentUserData(user)));
     });
   }
-  title = 'hw-hosting-app';
-  user: Observable<rootApp.AppState['auth']>
   role: string
   id: string
-  users: any = []
+  students: any = []
   userData: any = {}
+  homeworks: any = []
+  homeworksCollectionRef: AngularFirestoreCollection<any>;
 
   logout() {
     this.authSrvice.logout();
   }
 
   requestUserData(id: string) {
-    this.databaseService.fetchCollection('userId', id).then((documents) => {
-      this.store.dispatch(new documentActions.DocumentsSetAction(documents));
-    });
+    this.homeworksCollectionRef = this.db.collection(PATHS.HOMEWORKS)
+      .doc(PATHS.GROUP)
+      .collection<Item>(this.id)
+    this.homeworksCollectionRef
+      .snapshotChanges()
+      .pipe()
+      .subscribe((data: any) => {
+        const idDoc = data.map(item => {
+          return { ...item.payload.doc.data(), id: item.payload.doc.id };
+        });
+        this.store.dispatch(new documentActions.DocumentsSetAction(idDoc));
+      });
+  }
+
+  fetchStudents() {
+    this.db.collection(PATHS.USERS)
+      .doc(PATHS.GROUP)
+      .collection(PATHS.STUDENTS)
+      .snapshotChanges()
+      .pipe()
+      .subscribe((data: any) => {
+        this.students = data.map(item => {
+          return { ...item.payload.doc.data(), id: item.payload.doc.id };
+        });
+      });
   }
 
   currentUserData(data) {
@@ -73,5 +90,7 @@ export class AppComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fetchStudents();
+  }
 }

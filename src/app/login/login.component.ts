@@ -4,6 +4,7 @@ import * as loginActions from '../../store/auth/actions.auth';
 import { AuthService } from '../../services/auth.service';
 import * as rootApp from '../../store/app.reducer';
 import { AngularFirestore } from '@angular/fire/firestore';
+import {PATHS} from '../../constants';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
   email: string = null
   password: string = null
   isLogin = true
+  userName = ''
 
   login() {
     this.authSrvice.login(this.email, this.password).then((data) => {
@@ -49,7 +51,7 @@ export class LoginComponent implements OnInit {
       const userData: any = {
         refreshToken: user.refreshToken,
         // @ts-ignore
-        name: user.userName || '',
+        name: user.userName || this.userName,
         // @ts-ignore
         photo: user.photoUrl || '',
         email: user.email,
@@ -59,10 +61,17 @@ export class LoginComponent implements OnInit {
       this.store.dispatch(new loginActions.LoginAction(userData));
       this.authSrvice.setAuthCookie(userData);
       const { refreshToken, ...dbData } = userData
-      this.db.collection('users').add({
-        ...dbData
-      });
+      this.db.collection(PATHS.USERS)
+        .doc(PATHS.GROUP)
+        .collection(userData.role === 'student' ? PATHS.STUDENTS : PATHS.TEACHERS)
+        .add({
+           ...dbData
+        });
     });
+  }
+
+  handleUserName(value) {
+    if (typeof value === 'string') this.userName = value;
   }
 
   handleEmail(value) {
