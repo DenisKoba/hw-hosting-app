@@ -1,4 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {PATHS} from '../../constants';
+import {Item} from '../create-homework/create-homework.component';
+import * as documentActions from '../../store/documents/actions.documents';
+import {Store} from '@ngrx/store';
+import * as rootApp from '../../store/app.reducer';
+import {AuthService} from '../../services/auth.service';
+import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+import {Documents} from '../../types';
 
 @Component({
   selector: 'app-teacher-panel',
@@ -7,7 +15,17 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class TeacherPanelComponent implements OnInit {
 
-  constructor() {}
+  constructor(
+    readonly store: Store<rootApp.AppState>,
+    private db: AngularFirestore
+  ) {
+    this.store
+      .select('documents')
+      .pipe()
+      .subscribe(data => {
+        this.documents = data.studentDocuments;
+      });
+  }
 
   @Input() mode: string
   @Input() students: any[]
@@ -20,13 +38,48 @@ export class TeacherPanelComponent implements OnInit {
   }
 
   avarageRate = 3.2
+  homeworksCollectionRef: AngularFirestoreCollection<any>;
+  selectedValue = ''
+  isEditPopupVisible = false
+  editHomeworkNumber = null
+  documents = []
 
   get topics() {
     return this.students.map(student => student.name);
   }
 
+  get editingHomework(): Documents.Document | null {
+    if (this.editHomeworkNumber) {
+      return this.documents.find(document => document.number === this.editHomeworkNumber);
+    }
+
+    return null;
+  }
+
+  requestUserData(value: string) {
+    const id = this.students.find(student => student.name === value).id
+    this.homeworksCollectionRef = this.db.collection(PATHS.HOMEWORKS)
+      .doc(PATHS.GROUP)
+      .collection(id)
+    this.homeworksCollectionRef
+      .snapshotChanges()
+      .pipe()
+      .subscribe((data: any) => {
+        const idDoc = data.map(item => {
+          return { ...item.payload.doc.data(), id: item.payload.doc.id };
+        });
+        this.store.dispatch(new documentActions.DocumentsSetAction(idDoc));
+      });
+  }
+
+  openEditModal(data) {
+    this.editHomeworkNumber = data
+    this.isEditPopupVisible = true;
+  }
+
   handleSelect(data) {
-    console.log(data);
+    this.selectedValue = data.value;
+    this.requestUserData(this.selectedValue);
   }
 
   get buttonColor() {
@@ -42,6 +95,10 @@ export class TeacherPanelComponent implements OnInit {
     if (this.avarageRate >= 2 && this.avarageRate < 3) {
       return this.rateColors.red;
     }
+  }
+
+  closeEditModal() {
+    this.isEditPopupVisible = false;
   }
 
   ngOnInit() {

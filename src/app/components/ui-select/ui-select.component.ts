@@ -13,6 +13,7 @@ export class UiSelectComponent implements OnInit {
   @Input() currentOptionIndex: number
   @Input() name: string
   @Input() label: string
+  @Input() disabled: boolean
 
   @Output() select: EventEmitter<any> = new EventEmitter();
 

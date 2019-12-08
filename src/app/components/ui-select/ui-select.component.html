@@ -3,6 +3,7 @@
         [data]="options"
         label="Topic"
         name="Topic"
+        [disabled]="disabled"
         [currentValue]="options[0]"
         (selectedValue)="handleSelect($event)"
 ></material-angular-select>
