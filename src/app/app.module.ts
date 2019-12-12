@@ -20,7 +20,6 @@ import { SheetRowComponent } from './sheet-row/sheet-row.component';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { CreateHomeworkComponent } from './create-homework/create-homework.component';
 import { MaterialAngularSelectModule } from 'material-angular-select';
-import { TeacherEditModalComponent } from './teacher-edit-modal/teacher-edit-modal.component';
 import { StudentEditModalComponent } from './student-edit-modal/student-edit-modal.component';
 import { AuthService } from '../services/auth.service';
 import * as fromApp from '../store/app.reducer';
@@ -38,7 +37,6 @@ import { environment } from '../environments/environment';
     SheetComponent,
     SheetRowComponent,
     CreateHomeworkComponent,
-    TeacherEditModalComponent,
     StudentEditModalComponent,
   ],
   entryComponents: [CreateHomeworkComponent],

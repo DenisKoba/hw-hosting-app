@@ -23,11 +23,11 @@ export class UiButtonComponent implements OnInit {
   @Output() mouseoverButton: EventEmitter<any> = new EventEmitter();
 
   handleClick() {
-    this.clickButton.emit(null)
+    this.clickButton.emit(null);
   }
 
   handleMouseover() {
-    this.mouseoverButton.emit(null)
+    this.mouseoverButton.emit(null);
   }
 
   ngOnInit() {

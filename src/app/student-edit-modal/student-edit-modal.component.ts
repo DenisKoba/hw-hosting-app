@@ -15,7 +15,7 @@ import { Item } from '../create-homework/create-homework.component';
 })
 export class StudentEditModalComponent implements OnInit {
 
-  constructor(private storage: AngularFireStorage, private db: AngularFirestore, readonly store: Store<rootApp.AppState>,) {}
+  constructor(private storage: AngularFireStorage, private db: AngularFirestore, readonly store: Store<rootApp.AppState>) {}
   @Input() editingHomework: Documents.Document
   @Input() mode: string
   @Output() closeEditModal: EventEmitter<any> = new EventEmitter();
@@ -34,6 +34,18 @@ export class StudentEditModalComponent implements OnInit {
 
   get checkedIcon() {
     return `url(${this.editingHomework.status}.svg)`;
+  }
+
+  get isStudent() {
+    return this.mode === 'student'
+  }
+
+  get downloadLink() {
+    return this.isStudent ? this.editingHomework.file : this.editingHomework.teacherFile;
+  }
+
+  downloadFile() {
+    window.location.href = this.downloadLink;
   }
 
   updateComment() {
@@ -55,6 +67,7 @@ export class StudentEditModalComponent implements OnInit {
   }
 
   async uploadFile(event) {
+    if (!event.target) return
     const file = event.target.files[0];
     this.fileName = file.name
     const filePath = sha256(file.name);
@@ -68,6 +81,15 @@ export class StudentEditModalComponent implements OnInit {
           status: 'unchecked'
         });
     }
+    const updateTeacher = () => {
+      this.homeworksCollectionRef
+        .doc(this.editingHomework.id)
+        .update({
+          teacherFile: this.downloadUrl,
+          teacherFilename: this.fileName,
+          date: this.date,
+        });
+    }
     this.storage
       .ref(`files/${filePath}`)
       .put(file)
@@ -77,7 +99,7 @@ export class StudentEditModalComponent implements OnInit {
           .getDownloadURL()
           .subscribe((url: string) => {
             this.downloadUrl = url
-            update();
+            this.mode === 'student' ? update() : updateTeacher();
           });
       });
   }
