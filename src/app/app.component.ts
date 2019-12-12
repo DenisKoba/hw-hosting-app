@@ -23,8 +23,7 @@ export class AppComponent implements OnInit {
     readonly store: Store<rootApp.AppState>,
     private authSrvice: AuthService,
     private db: AngularFirestore,
-    private firebaseAuth: AngularFireAuth,
-    private databaseService: DatabaseService
+    private firebaseAuth: AngularFireAuth
   ) {
     this.store.dispatch(new AuthActions.ResolveAuthData());
     this.store
@@ -74,7 +73,7 @@ export class AppComponent implements OnInit {
       .pipe()
       .subscribe((data: any) => {
         this.students = data.map(item => {
-          return { ...item.payload.doc.data(), id: item.payload.doc.id };
+          return { ...item.payload.doc.data() };
         });
       });
   }

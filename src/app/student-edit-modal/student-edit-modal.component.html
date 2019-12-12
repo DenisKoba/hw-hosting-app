@@ -1,0 +1,67 @@
+<div class="edit-homework-modal-wrapper" (click)="closeModalHandler()">
+    <div class="edit-homework-modal" (click)="$event.stopPropagation()">
+        <h1 class="modal-header">Homework #{{ editingHomework.number }}</h1>
+        <div class="modal-content">
+            <div class="modal-content__input">
+                <div class="modal-content__filename">
+                    <span class="bold-font">Files: </span>
+                    {{ isStudent
+                        ? editingHomework.fileName
+                        : editingHomework.teacherFilename
+                    }}
+                </div>
+                <app-ui-input
+                        class="ui-input"
+                        [type]="'file'"
+                        (input)="uploadFile($event)"
+                ></app-ui-input>
+            </div>
+            <div class="modal-content__field">
+                <span class="bold-font">Date: </span>
+                {{ editingHomework.date }}
+            </div>
+            <div class="modal-content__field">
+                <span class="bold-font">Status: </span>
+                <span>{{ editingHomework.status }}</span>
+                <span class="checkbox-button" (click)="updateStatus()" *ngIf="!isStudent"></span>
+                <span class="status-icon" [ngStyle]="{ backgroundImage: checkedIcon }"></span>
+            </div>
+            <div class="modal-content__comment">
+                <div class="modal-content__comment_title">
+                    <span class="bold-font">{{ isStudent ? 'Teacher\'s comment' : 'Your comment' }}</span>
+                    <span *ngIf="!isStudent"
+                          [ngClass]="isEditingComment ? 'checkbox-button' : 'edit-button'"
+                          (click)="editComment()"
+                    ></span>
+                </div>
+                <div class="modal-content__comment_wrapper">
+                    <div class="modal-content__comment_text">
+                        <span *ngIf="!isEditingComment">{{ editingHomework.comment }}</span>
+                        <textarea
+                                class="comment-textarea"
+                                *ngIf="isEditingComment"
+                                [(ngModel)]="comment"
+                                autofocus>
+                            {{ editingHomework.comment }}
+                        </textarea>
+                    </div>
+                    <div class="modal-content__comment_rate" *ngIf="isStudent">{{ editingHomework.rate }}</div>
+                </div>
+            </div>
+            <app-ui-button class="button"
+                           [name]="isStudent ? 'Download teacher\'s file' : 'Download student\'s file'"
+                           color="#ffffff"
+                           background="#1464f6"
+                           border="none"
+                           padding="15px 12px 15px"
+                           (clickButton)="downloadFile()"
+            ></app-ui-button>
+            <a *ngIf="isStudent"
+               (click)="deleteHomework()"
+               class="delete-button">
+                Delete homework
+                <span class="trash-icon"></span>
+            </a>
+        </div>
+    </div>
+</div>

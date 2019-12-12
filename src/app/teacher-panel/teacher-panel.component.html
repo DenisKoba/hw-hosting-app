@@ -1,8 +1,17 @@
 <div class="navigation">
-    <p class="avarage-rate">Avarage rate <span class="avarage-rate__number" [ngStyle]="{ background: buttonColor }">4.3</span></p>
+    <p class="avarage-rate">Avarage rate <span class="avarage-rate__number"
+                                               [ngStyle]="{ background: buttonColor }">4.3</span></p>
     <app-ui-select [options]="topics"
                    [currentOptionIndex]="0"
                    label="Student Name"
                    name="Student name"
+                   *ngIf="topics.length"
                    (select)="handleSelect($event)"></app-ui-select>
-<app-sheet [mode]="mode"></app-sheet>
+</div>
+<app-sheet [mode]="mode" (openEditModal)="openEditModal($event)"></app-sheet>
+<app-student-edit-modal
+        *ngIf="isEditPopupVisible && editingHomework"
+        (closeEditModal)="closeEditModal()"
+        [editingHomework]="editingHomework"
+        [mode]="mode"
+></app-student-edit-modal>

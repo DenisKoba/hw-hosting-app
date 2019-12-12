@@ -1,0 +1,36 @@
+<div class="create-homework-modal-wrapper" (click)="closeModalHandler()"></div>
+<div class="create-homework-modal">
+    <h1 class="modal-header">New homework</h1>
+    <div class="modal-content">
+        <div class="modal-content__select">
+            <app-ui-select
+                    [options]="topics"
+                    [currentOptionIndex]="0"
+                    label="Topic"
+                    name="Topic"
+                    (select)="handleSelect($event)"
+                    class="ui-select"
+            ></app-ui-select>
+        </div>
+        <div class="modal-content__input">
+            <div class="modal-content__filename">{{ fileName }}</div>
+            <app-ui-input
+                    class="ui-input"
+                    [type]="'file'"
+                    (input)="uploadFile($event)"
+            ></app-ui-input>
+        </div>
+        <div class="modal-content__button">
+            <app-ui-button
+                    name="Submit"
+                    color="#ffffff"
+                    background="#1464f6"
+                    border="none"
+                    [disabled]="!downloadUrl.length"
+                    (clickButton)="submitHomework()"
+                    padding="20px 60px"
+            ></app-ui-button>
+        </div>
+        <div>{{ someData }}</div>
+    </div>
+</div>

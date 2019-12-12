@@ -10,4 +10,5 @@ export type Document = {
   fileName: string,
   topic: string
   id?: string
+  teacherFilename?: string,
 };
