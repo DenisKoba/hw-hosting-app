@@ -27,8 +27,6 @@ export class StudentPanelComponent implements OnInit {
     gray: '#D1D1D1',
     red: '#FF2323',
   }
-
-  avarageRate = 3.2
   isPopupVisible = false
   isEditPopupVisible = false
   editHomeworkNumber = null
@@ -47,6 +45,15 @@ export class StudentPanelComponent implements OnInit {
     if (this.avarageRate >= 2 && this.avarageRate < 3) {
       return this.rateColors.red;
     }
+  }
+
+  get avarageRate() {
+    const rates = this.documents
+      .filter((document: Documents.Document) => document.rate !== 0)
+      .map((document: Documents.Document) => document.rate)
+    const avarage = rates.reduce((sum, current) => sum + current, 0)
+    if (avarage === 0) return 0
+    return avarage / rates.length;
   }
 
   get editingHomework(): Documents.Document | null {

@@ -26,6 +26,27 @@
   &__field {
     padding: 10px 10px;
     border-bottom: 1px solid #dadada;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__field-rate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &_rates {
+      padding: 10px;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      background: #f2f2f2;
+      justify-content: center;
+      margin: 0 20px 0 0;
+      border-radius: 50%;
+      cursor: pointer;
+    }
   }
 
   &__comment_wrapper {
@@ -44,13 +65,36 @@
     }
 
     &_text {
-      padding: 20px;
+      padding: 0 20px;
       background-color: rgba(0, 48, 242, 0.25);
       min-width: 50%;
       min-height: 100px;
       display: block;
       border-radius: 10px;
       width: 100%;
+      word-break: break-all;
+      overflow: scroll;
+      max-height: 250px;
+
+      &:before {
+        content: "";
+        height: 20px;
+        width: 100%;
+        position: sticky;
+        display: block;
+        background: #bdcdfd;
+        top: 0;
+      }
+
+      &:after {
+        content: "";
+        height: 20px;
+        width: 100%;
+        position: sticky;
+        display: block;
+        background: #bdcdfd;
+        bottom: 0;
+      }
     }
 
     &_rate {
@@ -155,7 +199,7 @@
 
 .status-icon {
   height: 15px;
-  width: 15px;
+  width: 22px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -192,7 +236,20 @@
   border: none;
   resize: none;
   width: 100%;
-  height: 100px;
   display: block;
   padding: 0;
+  font-size: 14px;
+  line-height: 20px;
+  max-height: 250px;
+  height: 150px;
+}
+
+.selected-rate {
+  background-color: lightseagreen;
+}
+
+.status-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

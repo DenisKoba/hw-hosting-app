@@ -1,12 +1,62 @@
 .avarage-rate {
   font-size: 13px;
   font-weight: 600;
-  margin: 16px 0;
+  padding: 8px;
+  margin: 0;
+  background-color: #e8e8e8;
+  display: flex;
+  align-items: center;
 
   &__number {
     color: #fff;
-    padding: 5px;
     border-radius: 50%;
     font-size: 12px;
+    display: flex;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 0 10px;
+
+  }
+}
+
+.navigation {
+  height: calc(100vh - 60px);
+  background: #fff;
+  border-right: 1px solid #f2f2f2;
+}
+
+.student {
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: Montserrat, sans-serif;
+  border-bottom: 1px solid #f2f2f2;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 20px;
+  transition: .3s;
+  cursor: pointer;
+  max-height: 61px;
+
+  &:hover {
+    background: #f2f2f2;
+  }
+
+  &__name {
+    z-index: 3;
+    position: relative;
+    display: block;
+    width: fit-content;
+  }
+
+  &__selected {
+    height: 8px;
+    background-color: rgba(0, 6, 245, 0.2);
+    width: 100%;
+    display: block;
+    position: relative;
+    top: -8px;
+    z-index: -1;
   }
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, DoCheck} from '@angular/core';
 import {PATHS} from '../../constants';
 import {Item} from '../create-homework/create-homework.component';
 import * as documentActions from '../../store/documents/actions.documents';
@@ -13,7 +13,7 @@ import {Documents} from '../../types';
   templateUrl: './teacher-panel.component.html',
   styleUrls: ['./teacher-panel.component.scss']
 })
-export class TeacherPanelComponent implements OnInit {
+export class TeacherPanelComponent implements DoCheck {
 
   constructor(
     readonly store: Store<rootApp.AppState>,
@@ -36,15 +36,13 @@ export class TeacherPanelComponent implements OnInit {
     gray: '#D1D1D1',
     red: '#FF2323',
   }
-
-  avarageRate = 3.2
   homeworksCollectionRef: AngularFirestoreCollection<any>;
   selectedValue = ''
   isEditPopupVisible = false
   editHomeworkNumber = null
   documents = []
 
-  get topics() {
+  get studentNames() {
     return this.students.map(student => student.name);
   }
 
@@ -54,6 +52,16 @@ export class TeacherPanelComponent implements OnInit {
     }
 
     return null;
+  }
+
+  get avarageRate() {
+    const rates = this.documents
+      .map((document: Documents.Document) => {
+        if (document.rate !== 0) return document.rate;
+      })
+    const avarage = rates.reduce((sum, current) => sum + current, 0)
+    if (avarage === 0) return 0
+    return avarage / rates.length;
   }
 
   requestUserData(value: string) {
@@ -77,8 +85,8 @@ export class TeacherPanelComponent implements OnInit {
     this.isEditPopupVisible = true;
   }
 
-  handleSelect(data) {
-    this.selectedValue = data.value;
+  handleSelect(name) {
+    this.selectedValue = name;
     this.requestUserData(this.selectedValue);
   }
 
@@ -101,8 +109,12 @@ export class TeacherPanelComponent implements OnInit {
     this.isEditPopupVisible = false;
   }
 
-  ngOnInit() {
-
+  ngDoCheck() {
+    if (this.selectedValue) {
+      return false;
+    } else {
+      this.handleSelect(this.studentNames[0]);
+    }
   }
 
 }

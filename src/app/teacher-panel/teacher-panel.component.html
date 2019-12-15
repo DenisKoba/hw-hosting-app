@@ -1,12 +1,13 @@
 <div class="navigation">
-    <p class="avarage-rate">Avarage rate <span class="avarage-rate__number"
-                                               [ngStyle]="{ background: buttonColor }">4.3</span></p>
-    <app-ui-select [options]="topics"
-                   [currentOptionIndex]="0"
-                   label="Student Name"
-                   name="Student name"
-                   *ngIf="topics.length"
-                   (select)="handleSelect($event)"></app-ui-select>
+    <p class="avarage-rate">Avarage rate <span class="avarage-rate__number" [ngStyle]="{ background: buttonColor }">{{ avarageRate }}</span></p>
+    <div *ngFor="let student of studentNames, index as i"
+         (click)="handleSelect(student)"
+         class="student">
+        <span class="student__name">
+            {{ student }}
+            <span *ngIf="selectedValue === student" class="student__selected"></span>
+        </span>
+    </div>
 </div>
 <app-sheet [mode]="mode" (openEditModal)="openEditModal($event)"></app-sheet>
 <app-student-edit-modal
