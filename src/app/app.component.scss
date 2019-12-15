@@ -11,7 +11,7 @@ body {
   width: 100%;
   display: block;
   padding: 15px 0;
-  background-color: #e8e8e8;
+  background-color: #0006f5;
 
   &__inner {
     max-width: 1170px;
@@ -27,6 +27,12 @@ body {
   display: block;
   width: 100%;
   margin: auto;
+}
+
+.teacher-panel {
+  display: grid;
+  margin: auto;
+  grid-template-columns: 1fr 5fr;
 }
 
 .avarage-rate {

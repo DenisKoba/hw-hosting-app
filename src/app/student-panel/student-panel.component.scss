@@ -6,12 +6,21 @@
 .avarage-rate {
   font-size: 13px;
   font-weight: 600;
-  margin: 16px 0;
+  padding: 8px;
+  margin: 0;
+  display: flex;
+  align-items: center;
 
   &__number {
     color: #fff;
-    padding: 5px;
     border-radius: 50%;
     font-size: 12px;
+    display: flex;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 0 10px;
+
   }
 }

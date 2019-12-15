@@ -3,8 +3,8 @@
     <div class="header__inner">
       <app-ui-button class="button"
                      name="Logout"
-                     color="#ffffff"
-                     background="#aaaaaa"
+                     color="#000000"
+                     background="#ffffff"
                      border="none"
                      padding="5px 12px 7px"
                      (clickButton)="logout()"
@@ -12,6 +12,6 @@
     </div>
   </header>
   <app-student-panel *ngIf="authSrvice.userRole === 'student'" [mode]="role" class="student-panel"></app-student-panel>
-  <app-teacher-panel *ngIf="authSrvice.userRole === 'teacher'" [mode]="role" [students]="students" class="student-panel"></app-teacher-panel>
+  <app-teacher-panel *ngIf="authSrvice.userRole === 'teacher'" [mode]="role" [students]="students" class="teacher-panel"></app-teacher-panel>
 </section>
 <app-login *ngIf="!authSrvice.isloggedIn"></app-login>

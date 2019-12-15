@@ -20,11 +20,21 @@
                 <span class="bold-font">Date: </span>
                 {{ editingHomework.date }}
             </div>
+            <div class="modal-content__field modal-content__field-rate" *ngIf="!isStudent">
+                <span [ngClass]="{ 'selected-rate': editingHomework.rate === rate }"
+                      class="modal-content__field-rate_rates"
+                      *ngFor="let rate of rates"
+                      (click)="handleRate(rate)">{{ rate }}
+                </span>
+            </div>
             <div class="modal-content__field">
-                <span class="bold-font">Status: </span>
-                <span>{{ editingHomework.status }}</span>
-                <span class="checkbox-button" (click)="updateStatus()" *ngIf="!isStudent"></span>
-                <span class="status-icon" [ngStyle]="{ backgroundImage: checkedIcon }"></span>
+                <span class="bold-font">Status:
+                    <span>{{ editingHomework.status }}</span>
+                </span>
+                <span class="status-wrapper">
+                    <span class="checkbox-button" (click)="updateStatus()" *ngIf="!isStudent"></span>
+                    <span class="status-icon" [ngStyle]="{ backgroundImage: checkedIcon }"></span>
+                </span>
             </div>
             <div class="modal-content__comment">
                 <div class="modal-content__comment_title">
@@ -53,6 +63,7 @@
                            color="#ffffff"
                            background="#1464f6"
                            border="none"
+                           [disabled]="isStudent && !editingHomework.teacherFile.length"
                            padding="15px 12px 15px"
                            (clickButton)="downloadFile()"
             ></app-ui-button>

@@ -26,6 +26,7 @@ export class StudentEditModalComponent implements OnInit {
   homeworksCollectionRef: AngularFirestoreCollection<any>;
   comment = ''
   isEditingComment = false
+  rates = [0, 1, 2, 3, 4, 5 ]
 
   get date() {
     const date = new Date()
@@ -101,6 +102,15 @@ export class StudentEditModalComponent implements OnInit {
             this.downloadUrl = url
             this.mode === 'student' ? update() : updateTeacher();
           });
+      });
+  }
+
+  handleRate(rate) {
+    this.homeworksCollectionRef
+      .doc(this.editingHomework.id)
+      .update({
+        rate,
+        status: 'checked'
       });
   }
 
