@@ -7,10 +7,29 @@
   align-items: center;
   justify-content: center;
 
+  &__error {
+    position: absolute;
+    right: 0;
+    color: #ffdc03;
+    font-size: 12px;
+
+    &_general {
+      left: 0;
+      right: 0;
+      width: fit-content;
+      margin: 20px auto;
+    }
+  }
+
+  &__input-wrapper {
+    position: relative;
+  }
+
   &__buttons-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 30px auto 0;
   }
 
   &__logo {
@@ -52,7 +71,6 @@
     border-radius: 30px;
     padding: 10px 50px;
     display: block;
-    margin: 20px auto 0;
   }
 
   .signup-button::ng-deep button {

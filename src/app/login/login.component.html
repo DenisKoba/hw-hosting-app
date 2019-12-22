@@ -1,25 +1,40 @@
 <section class="login">
    <div class="login__wrapper">
        <img class="login__logo" src="../../assets/projector.png">
-       <app-ui-input
-               *ngIf="!isLogin"
-               placeholder="Name and Surname"
-               class="login__name"
-               color="#ffffff"
-               (input)="handleUserName($event)"
-       ></app-ui-input>
-       <app-ui-input
-               placeholder="Email"
-               class="login__email"
-               color="#ffffff"
-               (input)="handleEmail($event)"
-       ></app-ui-input>
-       <app-ui-input
-               [placeholder]="isLogin ? 'Password' : 'Create password'"
-               type="password"
-               class="login__password"
-               (input)="handlePassword($event)"
-       ></app-ui-input>
+       <div class="login__input-wrapper">
+           <app-ui-input
+                   *ngIf="!isLogin"
+                   placeholder="Name and Surname"
+                   class="login__name"
+                   color="#ffffff"
+                   (input)="handleUserName($event)"
+                   (focusout)="shouldValidateName = true"
+                   (focus)="shouldValidateName = false"
+           ></app-ui-input>
+           <span *ngIf="!validateName && shouldValidateName && !isLogin" class="login__error">Name is too shirt</span>
+       </div>
+       <div class="login__input-wrapper">
+           <app-ui-input
+                   placeholder="Email"
+                   class="login__email"
+                   color="#ffffff"
+                   (input)="handleEmail($event)"
+                   (focusout)="shouldValidateEmail = true"
+                   (focus)="shouldValidateEmail = false"
+           ></app-ui-input>
+           <span *ngIf="!validateEmail && shouldValidateEmail" class="login__error">Wrong email</span>
+       </div>
+       <div class="login__input-wrapper">
+           <app-ui-input
+                   [placeholder]="isLogin ? 'Password' : 'Create password'"
+                   type="password"
+                   class="login__password"
+                   (input)="handlePassword($event)"
+                   (focusout)="shouldValidatePassword = true"
+                   (focus)="shouldValidatePassword = false"
+           ></app-ui-input>
+           <span *ngIf="shouldValidatePassword" class="login__error">{{ passwordError() }}</span>
+       </div>
       <div class="login__buttons-wrapper">
           <app-ui-button
                   fontWeight="600"
@@ -33,10 +48,11 @@
                   fontWeight="600"
                   fontSize="16px"
                   [name]="isLogin ? 'Login' : 'Sign up'"
-                  background=""
+                  [disabled]="!isLoginButtonActive"
                   (clickButton)="isLogin ? login() : signUp()"
                   class="login__button"
           ></app-ui-button>
       </div>
+      <span class="login__error login__error_general">{{ error }}</span>
    </div>
 </section>

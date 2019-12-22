@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -11,6 +11,7 @@ import * as documentActions from '../store/documents/actions.documents';
 import { DatabaseService } from '../services/database.service';
 import { PATHS } from '../constants';
 import {Item} from './create-homework/create-homework.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -18,12 +19,13 @@ import {Item} from './create-homework/create-homework.component';
   styleUrls: ['./app.component.scss'],
   providers: [DatabaseService]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, DoCheck {
   constructor(
     readonly store: Store<rootApp.AppState>,
     private authSrvice: AuthService,
     private db: AngularFirestore,
-    private firebaseAuth: AngularFireAuth
+    private firebaseAuth: AngularFireAuth,
+    private router: Router,
   ) {
     this.store.dispatch(new AuthActions.ResolveAuthData());
     this.store
@@ -89,7 +91,20 @@ export class AppComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {
+  ngOnInit(): Promise<boolean> | void {
+    if (!this.authSrvice.isloggedIn) {
+      return this.router.navigate(['/login']);
+    }
+
+    if (this.authSrvice.userRole === 'student') {
+      this.router.navigate(['/student-panel']);
+    } else {
+      this.router.navigate(['/teacher-panel']);
+    }
     this.fetchStudents();
+  }
+
+  ngDoCheck() {
+    if (this.authSrvice.isloggedIn) this.fetchStudents();
   }
 }

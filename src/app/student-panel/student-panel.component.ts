@@ -33,21 +33,21 @@ export class StudentPanelComponent implements OnInit {
   documents: Documents.Document[] = []
 
   get buttonColor() {
-    if (this.avarageRate === 5) {
+    if (this.averageRate === 5) {
       return this.rateColors.green;
     }
-    if (this.avarageRate >= 4 && this.avarageRate < 5) {
+    if (this.averageRate >= 4 && this.averageRate < 5) {
       return this.rateColors.orange;
     }
-    if (this.avarageRate >= 3 && this.avarageRate < 4) {
+    if (this.averageRate >= 3 && this.averageRate < 4) {
       return this.rateColors.gray;
     }
-    if (this.avarageRate >= 2 && this.avarageRate < 3) {
+    if (this.averageRate >= 2 && this.averageRate < 3) {
       return this.rateColors.red;
     }
   }
 
-  get avarageRate() {
+  get averageRate() {
     const rates = this.documents
       .filter((document: Documents.Document) => document.rate !== 0)
       .map((document: Documents.Document) => document.rate)

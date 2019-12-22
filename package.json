@@ -29,6 +29,7 @@
     "ng-modal": "^1.0.2",
     "ng-multiselect-dropdown": "^0.2.5",
     "ngx-smart-modal": "^7.2.1",
+    "passworder": "0.0.23",
     "rxjs": "^6.4.0",
     "tslib": "^1.10.0",
     "uninstall": "0.0.0",

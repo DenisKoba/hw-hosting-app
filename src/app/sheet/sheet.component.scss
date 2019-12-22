@@ -7,3 +7,18 @@
   padding: 10px 15px;
   box-sizing: border-box;
 }
+
+.status-filter {
+  background-image: url("../components/svg/sort.svg");
+  height: 15px;
+  width: 15px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin: 0 0 0 5px;
+}
+
+.sort {
+  cursor: pointer;
+}

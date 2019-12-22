@@ -3,13 +3,14 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs';
 import Cookie from 'js-cookie';
-import { AUTH } from '../store/auth/actions.auth'
+import { AUTH } from '../store/auth/actions.auth';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
   user: Observable<firebase.User>;
 
-  constructor(private firebaseAuth: AngularFireAuth) {
+  constructor(private firebaseAuth: AngularFireAuth, private router: Router) {
     this.user = firebaseAuth.authState;
   }
 
@@ -26,7 +27,7 @@ export class AuthService {
       .auth
       .signInWithEmailAndPassword(email, password)
       .then(value => value)
-      .catch(err => console.warn('Something went wrong:', err.message));
+      .catch(err => err);
   }
 
   signUpNewUser(email: string, password: string) {
@@ -39,9 +40,10 @@ export class AuthService {
 
   logout() {
     this.removeAuthCookie()
-    return this.firebaseAuth
+    this.firebaseAuth
       .auth
       .signOut();
+    this.router.navigate(['/login']);
   }
 
   setAuthCookie(data) {
