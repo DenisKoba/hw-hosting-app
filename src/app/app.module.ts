@@ -7,6 +7,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { RouterModule, Routes } from '@angular/router';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { StudentEditModalComponent } from './student-edit-modal/student-edit-mod
 import { AuthService } from '../services/auth.service';
 import * as fromApp from '../store/app.reducer';
 import { environment } from '../environments/environment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -49,6 +51,7 @@ const appRoutes: Routes = [
   ],
   entryComponents: [CreateHomeworkComponent],
   imports: [
+    MatSelectModule,
     BrowserModule,
     AppRoutingModule,
     NgxSmartModalModule.forRoot(),
@@ -62,7 +65,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }
-    )
+    ),
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService,

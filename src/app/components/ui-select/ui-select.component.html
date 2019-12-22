@@ -1,9 +1,8 @@
-<material-angular-select
-        class="ui-select"
-        [data]="options"
-        label="Topic"
-        name="Topic"
-        [disabled]="disabled"
-        [currentValue]="options[0]"
-        (selectedValue)="handleSelect($event)"
-></material-angular-select>
+<mat-form-field class="ui-select">
+    <mat-label>Theme</mat-label>
+    <mat-select (selectionChange)="handleSelect($event)" name="food">
+        <mat-option *ngFor="let topic of topics" [value]="topic">
+            {{ topic }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

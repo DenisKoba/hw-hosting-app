@@ -9,7 +9,7 @@ export class UiSelectComponent implements OnInit {
 
   constructor() { }
 
-  @Input() options: string[]
+  @Input() topics: string[]
   @Input() currentOptionIndex: number
   @Input() name: string
   @Input() label: string
@@ -18,7 +18,7 @@ export class UiSelectComponent implements OnInit {
   @Output() select: EventEmitter<any> = new EventEmitter();
 
   handleSelect(data) {
-    this.select.emit(data)
+    this.select.emit(data);
   }
 
   ngOnInit() {
