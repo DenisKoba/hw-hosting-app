@@ -1,5 +1,5 @@
 <div class="navigation">
-    <p class="avarage-rate">Avarage rate <span class="avarage-rate__number" [ngStyle]="{ background: buttonColor }">{{ avarageRate }}</span></p>
+    <p class="avarage-rate">Avarage rate <span class="avarage-rate__number" [ngStyle]="{ background: buttonColor }">{{ averageRate }}</span></p>
     <div *ngFor="let student of studentNames, index as i"
          (click)="handleSelect(student)"
          class="student">

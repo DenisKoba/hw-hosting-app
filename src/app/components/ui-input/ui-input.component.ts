@@ -15,11 +15,21 @@ export class UiInputComponent implements OnInit {
   @Input() value: string
   @Input() borderColor: string
   @Output() input: EventEmitter<any> = new EventEmitter();
+  @Output() focusout: EventEmitter<any> = new EventEmitter();
+  @Output() focus: EventEmitter<any> = new EventEmitter();
 
   inputValue: string = null
 
   handleInput() {
     this.input.emit(this.inputValue)
+  }
+
+  handleFocus() {
+    this.focus.emit(true);
+  }
+
+  handleFocusout() {
+    this.focusout.emit(true);
   }
 
   get classNameByType() {

@@ -27,6 +27,17 @@ export class SheetComponent implements OnInit {
     this.openEditModal.emit(data);
   }
 
+  sort() {
+    this.documents.sort((a, b) => {
+      if (a.status < b.status)
+        return -1
+      if (a.status > b.status)
+        return 1
+      return 0;
+    });
+    console.log(this.documents);
+  }
+
   ngOnInit() {
   }
 

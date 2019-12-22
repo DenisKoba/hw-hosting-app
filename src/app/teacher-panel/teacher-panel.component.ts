@@ -54,11 +54,10 @@ export class TeacherPanelComponent implements DoCheck {
     return null;
   }
 
-  get avarageRate() {
+  get averageRate() {
     const rates = this.documents
-      .map((document: Documents.Document) => {
-        if (document.rate !== 0) return document.rate;
-      })
+      .filter((document: Documents.Document) => document.rate !== 0)
+      .map((document: Documents.Document) => document.rate)
     const avarage = rates.reduce((sum, current) => sum + current, 0)
     if (avarage === 0) return 0
     return avarage / rates.length;
@@ -91,16 +90,16 @@ export class TeacherPanelComponent implements DoCheck {
   }
 
   get buttonColor() {
-    if (this.avarageRate === 5) {
+    if (this.averageRate === 5) {
       return this.rateColors.green;
     }
-    if (this.avarageRate >= 4 && this.avarageRate < 5) {
+    if (this.averageRate >= 4 && this.averageRate < 5) {
       return this.rateColors.orange;
     }
-    if (this.avarageRate >= 3 && this.avarageRate < 4) {
+    if (this.averageRate >= 3 && this.averageRate < 4) {
       return this.rateColors.gray;
     }
-    if (this.avarageRate >= 2 && this.avarageRate < 3) {
+    if (this.averageRate >= 2 && this.averageRate < 3) {
       return this.rateColors.red;
     }
   }
@@ -110,11 +109,8 @@ export class TeacherPanelComponent implements DoCheck {
   }
 
   ngDoCheck() {
-    if (this.selectedValue) {
-      return false;
-    } else {
-      this.handleSelect(this.studentNames[0]);
-    }
+    if (this.selectedValue) return false;
+    if (this.studentNames.length) this.handleSelect(this.studentNames[0]);
   }
 
 }

@@ -6,6 +6,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,13 @@ import { StudentEditModalComponent } from './student-edit-modal/student-edit-mod
 import { AuthService } from '../services/auth.service';
 import * as fromApp from '../store/app.reducer';
 import { environment } from '../environments/environment';
+
+const appRoutes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'student-panel', component: StudentPanelComponent },
+  { path: 'teacher-panel', component: TeacherPanelComponent },
+];
+
 
 @NgModule({
   declarations: [
@@ -50,7 +58,11 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true }
+    )
   ],
   providers: [
     AuthService,

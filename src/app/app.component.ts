@@ -11,6 +11,7 @@ import * as documentActions from '../store/documents/actions.documents';
 import { DatabaseService } from '../services/database.service';
 import { PATHS } from '../constants';
 import {Item} from './create-homework/create-homework.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,8 @@ export class AppComponent implements OnInit {
     readonly store: Store<rootApp.AppState>,
     private authSrvice: AuthService,
     private db: AngularFirestore,
-    private firebaseAuth: AngularFireAuth
+    private firebaseAuth: AngularFireAuth,
+    private router: Router,
   ) {
     this.store.dispatch(new AuthActions.ResolveAuthData());
     this.store
@@ -89,7 +91,16 @@ export class AppComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {
+  ngOnInit(): Promise<boolean> | void {
+    if (!this.authSrvice.isloggedIn) {
+      return this.router.navigate(['/login']);
+    }
+
+    if (this.authSrvice.userRole === 'student') {
+      this.router.navigate(['/student-panel']);
+    } else {
+      this.router.navigate(['/teacher-panel']);
+    }
     this.fetchStudents();
   }
 }

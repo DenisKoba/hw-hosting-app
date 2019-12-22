@@ -2,6 +2,8 @@
     <input [placeholder]="placeholder"
            [(ngModel)]="inputValue"
            (input)="handleInput($event)"
+           (focusout)="handleFocusout()"
+           (focus)="handleFocus()"
            [type]="type"
            [class]="classNameByType"
            [ngStyle]="{ 'border-bottom': '1px solid' + borderColor, color: color }"
