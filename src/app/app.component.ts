@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss'],
   providers: [DatabaseService]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, DoCheck {
   constructor(
     readonly store: Store<rootApp.AppState>,
     private authSrvice: AuthService,
@@ -102,5 +102,9 @@ export class AppComponent implements OnInit {
       this.router.navigate(['/teacher-panel']);
     }
     this.fetchStudents();
+  }
+
+  ngDoCheck() {
+    if (this.authSrvice.isloggedIn) this.fetchStudents();
   }
 }
