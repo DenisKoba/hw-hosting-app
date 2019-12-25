@@ -58,6 +58,7 @@ const appRoutes: Routes = [
     MaterialAngularSelectModule,
     FormsModule,
     StoreModule.forRoot(fromApp.AppReducer),
+    // @ts-ignore
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
