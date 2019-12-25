@@ -1240,7 +1240,16 @@ let LoginComponent = class LoginComponent {
         if (typeof value === 'string')
             this.password = value;
     }
+    handleEnterKey(event) {
+        if (event.keyCode === 13) {
+            this.isLogin ? this.login() : this.signUp();
+        }
+    }
     ngOnInit() {
+        document.addEventListener('keypress', this.handleEnterKey);
+    }
+    ngOnDestroy() {
+        document.removeEventListener('keypress', this.handleEnterKey, false);
     }
 };
 LoginComponent.ctorParameters = () => [
