@@ -126,11 +126,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    document.addEventListener('keypress', this.handleEnterKey);
+    passworder.lengthErrorMessage = 'Password is too short'
+    document.addEventListener('keypress', (event) => this.handleEnterKey(event));
   }
 
   ngOnDestroy() {
-    document.removeEventListener('keypress', this.handleEnterKey, false);
+    document.removeEventListener('keypress', (event) => this.handleEnterKey(event), false);
   }
-
 }

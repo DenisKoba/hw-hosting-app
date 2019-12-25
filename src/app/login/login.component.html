@@ -11,7 +11,7 @@
                    (focusout)="shouldValidateName = true"
                    (focus)="shouldValidateName = false"
            ></app-ui-input>
-           <span *ngIf="!validateName && shouldValidateName && !isLogin" class="login__error">Name is too shirt</span>
+           <span *ngIf="!validateName && shouldValidateName && !isLogin" class="login__error">Name is too short</span>
        </div>
        <div class="login__input-wrapper">
            <app-ui-input
