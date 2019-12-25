@@ -1,7 +1,6 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import * as AuthActions from '../store/auth/actions.auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import * as rootApp from '../store/app.reducer';
