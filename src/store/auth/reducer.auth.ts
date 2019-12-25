@@ -25,7 +25,7 @@ const InitialState: AuthState = {
 }
 
 
-export const authReducer = (state = InitialState, action: AuthActions.AuthActions) => {
+export function authReducer(state = InitialState, action: AuthActions.AuthActions) {
   switch (action.type) {
     case AuthActions.AUTH.LOGIN:
       return {

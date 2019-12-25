@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     readonly store: Store<rootApp.AppState>,
-    private authSrvice: AuthService,
+    public authSrvice: AuthService,
     private db: AngularFirestore,
     private router: Router,
   ) { }

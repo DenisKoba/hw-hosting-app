@@ -21,7 +21,7 @@ export class UiInputComponent implements OnInit {
   inputValue: string = null
 
   handleInput() {
-    this.input.emit(this.inputValue)
+    this.input.emit(this.inputValue);
   }
 
   handleFocus() {

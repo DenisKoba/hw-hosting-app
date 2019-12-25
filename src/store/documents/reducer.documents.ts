@@ -10,7 +10,7 @@ const InitialState: DocumentsState = {
   studentDocuments: [],
 };
 
-export const documentsReducer = (state = InitialState, action: DocumentsActions.DocumentsActions) => {
+export function documentsReducer(state = InitialState, action: DocumentsActions.DocumentsActions) {
   switch (action.type) {
     case DocumentsActions.DOCUMENTS.DOCUMENTS_SET:
       return {

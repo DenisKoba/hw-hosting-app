@@ -1,7 +1,7 @@
 <label [class]="labelClassBytype">
     <input [placeholder]="placeholder"
            [(ngModel)]="inputValue"
-           (input)="handleInput($event)"
+           (input)="handleInput()"
            (focusout)="handleFocusout()"
            (focus)="handleFocus()"
            [type]="type"

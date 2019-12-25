@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit, DoCheck {
   constructor(
     readonly store: Store<rootApp.AppState>,
-    private authSrvice: AuthService,
+    public authSrvice: AuthService,
     private db: AngularFirestore,
     private firebaseAuth: AngularFireAuth,
     private router: Router,
