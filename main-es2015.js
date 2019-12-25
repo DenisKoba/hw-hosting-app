@@ -1247,7 +1247,7 @@ let LoginComponent = class LoginComponent {
     }
     ngOnInit() {
         passworder__WEBPACK_IMPORTED_MODULE_2__["default"].lengthErrorMessage = 'Password is too short';
-        document.addEventListener('keypress', this.handleEnterKey);
+        document.addEventListener('keypress', (event) => this.handleEnterKey(event));
     }
     ngOnDestroy() {
         document.removeEventListener('keypress', (event) => this.handleEnterKey(event), false);
