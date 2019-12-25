@@ -119,16 +119,18 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (typeof value === 'string') this.password = value;
   }
 
+  handleEnterKey(event) {
+    if (event.keyCode === 13) {
+      this.isLogin ? this.login() : this.signUp();
+    }
+  }
+
   ngOnInit() {
-    document.addEventListener('keypress', (event) => {
-      if (event.keyCode === 13) {
-        this.isLogin ? thsi.login() : this.signUp();
-      }
-    });
+    document.addEventListener('keypress', this.handleEnterKey);
   }
 
   ngOnDestroy() {
-    document.removeEventListener('keypress');
+    document.removeEventListener('keypress', this.handleEnterKey, false);
   }
 
 }
