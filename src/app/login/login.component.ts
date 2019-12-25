@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import passworder from 'passworder';
 import { Store } from '@ngrx/store';
 import * as loginActions from '../../store/auth/actions.auth';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     readonly store: Store<rootApp.AppState>,
@@ -120,7 +120,15 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    document.addEventListener('keypress', (event) => {
+      if (event.keyCode === 13) {
+        this.isLogin ? thsi.login() : this.signUp();
+      }
+    });
+  }
 
+  ngOnDestroy() {
+    document.removeEventListener('keypress');
   }
 
 }
