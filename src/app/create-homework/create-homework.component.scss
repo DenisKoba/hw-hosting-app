@@ -35,6 +35,7 @@
     border-radius: 5px;
     padding: 0 0 0 10px;
     cursor: pointer;
+    margin: 20px 0;
   }
 
   &__filename {
@@ -67,4 +68,8 @@
 .ui-select::ng-deep .mdl-textfield {
   padding: 20px 0 30px;
   width: 100%;
+}
+
+.students-names {
+  overflow-y: scroll;
 }

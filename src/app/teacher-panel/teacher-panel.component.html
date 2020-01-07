@@ -1,12 +1,14 @@
 <div class="navigation">
     <p class="avarage-rate">Avarage rate <span class="avarage-rate__number" [ngStyle]="{ background: buttonColor }">{{ averageRate }}</span></p>
-    <div *ngFor="let student of studentNames, index as i"
-         (click)="handleSelect(student)"
-         class="student">
+    <div class="students-names">
+        <div *ngFor="let student of studentNames, index as i"
+             (click)="handleSelect(student)"
+             class="student">
         <span class="student__name">
             {{ student }}
             <span *ngIf="selectedValue === student" class="student__selected"></span>
         </span>
+        </div>
     </div>
 </div>
 <app-sheet [mode]="mode" (openEditModal)="openEditModal($event)"></app-sheet>
