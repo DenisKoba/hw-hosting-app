@@ -71,5 +71,6 @@
 }
 
 .students-names {
-  overflow-y: scroll;
+  overflow: scroll;
+  height: calc(100vh - 100px);
 }

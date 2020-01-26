@@ -76,8 +76,4 @@ export class StudentPanelComponent implements OnInit {
   closeEditModal() {
     this.isEditPopupVisible = false;
   }
-
-  ngOnInit(): void {
-    console.log(this.modal);
-  }
 }
