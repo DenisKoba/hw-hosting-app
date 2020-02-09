@@ -1,5 +1,7 @@
-<button class="ui-button"
-        [ngStyle]="{
+<div class="button-wrapper">
+    <button class="ui-button"
+            *ngIf="!downloadLink"
+            [ngStyle]="{
         background: background,
         color: color,
         padding: padding,
@@ -8,9 +10,27 @@
         fontSize: fontSize,
         fontWeight: fontWeight
         }"
-        [disabled]="disabled"
-        (click)="handleClick()"
-        (mouseover)="handleMouseover()" >
-    {{ name }}
-    <ng-content></ng-content>
-</button>
+            [disabled]="disabled"
+            (click)="handleClick()"
+            (mouseover)="handleMouseover()" >
+        {{ name }}
+        <ng-content></ng-content>
+    </button>
+    <a  *ngIf="downloadLink"
+        class="ui-button ui-link"
+        [ngStyle]="{
+        textDecoration: 'none',
+        background: background,
+        color: color,
+        padding: padding,
+        border: border,
+        outline: outline,
+        fontSize: fontSize,
+        fontWeight: fontWeight
+    }"
+        [href]="downloadLink"
+    >
+        {{ name }}
+    </a>
+
+</div>

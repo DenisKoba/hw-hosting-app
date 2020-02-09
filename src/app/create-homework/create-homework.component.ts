@@ -42,6 +42,12 @@ export class CreateHomeworkComponent {
       .subscribe(data => {
         this.userId = data.userData.id;
       });
+    this.store
+      .select('documents')
+      .pipe()
+      .subscribe(data => {
+        this.documents = data.studentDocuments;
+      });
     this.userDoc = afs.doc<Item>(`homeworks/group2`);
     this.itemsCollection = this.userDoc.collection<Item>(this.userId);
     this.items = this.itemsCollection.valueChanges();
@@ -56,6 +62,8 @@ export class CreateHomeworkComponent {
   private itemsCollection: AngularFirestoreCollection<Item>;
   private userDoc: AngularFirestoreDocument;
   items: Observable<Item[]>;
+  documents = []
+  error = ''
 
   get topics() {
     return this.topicsFullList.map(topic => topic.topicName);
@@ -82,13 +90,20 @@ export class CreateHomeworkComponent {
   }
 
   get dateCreated() {
-    const date = new Date();
-    return `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
+    const dateNew = new Date()
+    return `${dateNew.getDate()}/${dateNew.getMonth() + 1}/${dateNew.getFullYear()}`;
+  }
+
+  resetError() {
+    this.error = '';
   }
 
   submitHomework() {
     // Persist a document id
     const item: Item = this.homeworkModel;
+    if (this.documents.find(document => document.number === this.homeworkModel.number)) {
+      return this.error = 'This topic number already exists, edit uploaded topic please';
+    }
     this.itemsCollection.add(item)
     this.store.dispatch(new documentActions.DocumentsAddAction(this.homeworkModel))
     this.closeModalHandler();

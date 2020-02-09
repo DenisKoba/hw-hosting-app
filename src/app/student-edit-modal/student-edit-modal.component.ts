@@ -29,8 +29,8 @@ export class StudentEditModalComponent implements OnInit {
   rates = [0, 1, 2, 3, 4, 5 ]
 
   get date() {
-    const date = new Date()
-    return `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
+    const dateNew = new Date()
+    return `${dateNew.getDate()}/${dateNew.getMonth() + 1}/${dateNew.getFullYear()}`;
   }
 
   get checkedIcon() {
@@ -46,7 +46,7 @@ export class StudentEditModalComponent implements OnInit {
   }
 
   downloadFile() {
-    window.location.href = this.downloadLink;
+    return;
   }
 
   updateComment() {

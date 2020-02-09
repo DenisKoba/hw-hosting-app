@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, OnInit, AfterContentInit } from '@angular/core';
 import {Store} from '@ngrx/store';
 import * as rootApp from '../../store/app.reducer';
 import { Documents } from '../../types';
@@ -9,7 +9,7 @@ import { Documents } from '../../types';
   templateUrl: './student-panel.component.html',
   styleUrls: ['./student-panel.component.scss']
 })
-export class StudentPanelComponent implements OnInit {
+export class StudentPanelComponent implements OnInit, AfterContentInit {
   constructor(readonly store: Store<rootApp.AppState>) {
     this.store
       .select('documents')
@@ -78,5 +78,9 @@ export class StudentPanelComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngAfterContentInit() {
+    console.log(this.documents)
   }
 }

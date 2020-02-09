@@ -50,7 +50,7 @@
                         <textarea
                                 class="comment-textarea"
                                 *ngIf="isEditingComment"
-                                [(ngModel)]="comment"
+                                (ngModel)="comment"
                                 autofocus>
                             {{ editingHomework.comment }}
                         </textarea>
@@ -65,6 +65,7 @@
                            border="none"
                            [disabled]="isStudent && !editingHomework.teacherFile.length"
                            padding="15px 12px 15px"
+                           [downloadLink]="this.isStudent ? this.editingHomework.teacherFile : this.editingHomework.file"
                            (clickButton)="downloadFile()"
             ></app-ui-button>
             <a *ngIf="isStudent"

@@ -8,6 +8,7 @@
                     [currentOptionIndex]="0"
                     label="Topic"
                     name="Topic"
+                    (click)="resetError()"
                     (select)="handleSelect($event)"
                     class="ui-select"
             ></app-ui-select>
@@ -31,6 +32,7 @@
                     padding="20px 60px"
             ></app-ui-button>
         </div>
+        <div class="error">{{ error }}</div>
         <div>{{ someData }}</div>
     </div>
 </div>

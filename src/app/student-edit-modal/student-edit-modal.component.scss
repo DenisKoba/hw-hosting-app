@@ -253,3 +253,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.button::ng-deep .button-wrapper {
+  margin: 20px 0;
+}
