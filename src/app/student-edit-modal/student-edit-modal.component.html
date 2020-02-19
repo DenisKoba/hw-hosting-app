@@ -50,7 +50,7 @@
                         <textarea
                                 class="comment-textarea"
                                 *ngIf="isEditingComment"
-                                (ngModel)="comment"
+                                [(ngModel)]="comment"
                                 autofocus>
                             {{ editingHomework.comment }}
                         </textarea>
